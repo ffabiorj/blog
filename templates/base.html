@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <title>Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href=" {{ url_for('static', filename='fonts') }}">
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
@@ -19,6 +21,10 @@
                         <li><a href="{{ url_for('contact') }}">Contact</a></li>
                     </ul>
                  </div>
+                 <ul class="nav navbar-nav navbar-right">
+                   <li><a href="#"><span class="glyphicon glyphicon-user">SignUp</span></a></li>
+                   <li><a href="#"><span class="glyphicon glyphicon-log-in">Login</span></a></li>
+                 </ul>
             </div>
         </div>
          <div class="container">
@@ -26,6 +32,12 @@
 
         {% endblock %}
          </div>
+
+         <footer class="footer">
+           <div class="fot">
+           <span>Created and Developed by Fabio Oliveira</span>
+           </div>
+         </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

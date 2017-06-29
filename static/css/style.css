@@ -1,10 +1,81 @@
+
+
+
 .top {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 
 .button {
   margin-top: 20px;
+}
+
+.footer {
+  line-height: 60px;
+}
+
+.h1-post {
+  margin-top: 30px;
+}
+
+.fot {
+  text-align: center;
+  background-color: #bcb8b8;
+  padding: 0 15px;
+  margin-top: 30px;
+}
+
+.blog-header {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.blog-title {
+  margin-top: 30px;
+  margin-bottom: 0;
+  font-size: 60px;
+  font-weight: normal;
+}
+
+.blog-description {
+  font-size: 20px;
+  color: #999;
+}
+
+
+.form {
+  margin-top: 80px;
+}
+
+.text-top {
+  margin-bottom: 40px;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0px;
+  border-top: 2px solid #eee;
+}
+
+.sidebar-module {
+  padding: 15px;
+  margin: 0 -15px 15;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+
+}
+
+ol {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 
