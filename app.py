@@ -1,6 +1,6 @@
 # imports
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, flash
 from datetime import date
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
@@ -62,7 +62,8 @@ class Post(db.Model):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    post = db.Post.query.all()
+    return render_template('index.html', post=post)
 
 
 @app.route('/signup')
@@ -78,6 +79,11 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 
 

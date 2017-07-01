@@ -12,18 +12,15 @@
 <div class="row">
 <div class="col-sm-8 blog-man">
 <div class="blog-post"></div>
-<h2 class="blog-post-title">Sample blog post</h2>
+{% for post in post %}
+<h2 class="blog-post-title">{{ post.title }}</h2>
 <p class="blog-date">
-  January 1, 2016 by Fabio
+  {{ post.date_pub }}
 </p>
 
-<p>Donec sollicitudin molestie malesuada. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt.</p>
+<p>{{ post.content }}</p>
 <hr>
-<h2 class="blog-post-title">Sample blog post</h2>
-<p class="blog-date">
-  January 1, 2016 by Fabio
-</p>
-<p>Donec sollicitudin molestie malesuada. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Nulla porttitor accumsan tincidunt.</p>
+{% endfor %}
 
 </div>
 <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
