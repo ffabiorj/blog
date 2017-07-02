@@ -1,6 +1,6 @@
 # imports
-
-from flask import Flask, render_template, redirect, url_for, flash
+import ipdb
+from flask import Flask, render_template, redirect, url_for, flash, request
 from datetime import date
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
@@ -13,6 +13,7 @@ app = Flask(__name__)
 # config
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'x17F\x85Z\xb2G\x8e\xa5\xdb\xdf\xe02\xf4&n\x8a:\xc7_\xe1xbu'
 
 # instances
 
@@ -66,6 +67,18 @@ def index():
     return render_template('index.html', post=post)
 
 
+@app.route('/add', methods=['POST', 'GET'])
+def add():
+    error = None
+    if request.method == 'POST':
+        post = Post(request.form['title'], request.form['content'])
+        db.session.add(post)
+        db.session.commit()
+        flash('New entry was successfully posted')
+        return redirect(url_for('index'))
+    return render_template('index.html')
+
+
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
@@ -83,9 +96,13 @@ def contact():
 
 @app.route('/login')
 def login():
+   """ ```
+    error = None
+    if request.method == 'POST':
+        if request.form['']
     return render_template('login.html')
 
-
+"""
 
 if __name__ == '__main__':
     manager.run()

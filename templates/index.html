@@ -2,6 +2,15 @@
 
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+<li><div class="alert alert-success alert1" role="alert">{{ message }}</div></li>
+{% endfor %}
+</ul>
+{% endif%}
+{% endwith %}
 <div class="blog-header">
   <h1 class="blog-title">The Blog</h1>
     <p class="lead blog-description">
@@ -43,11 +52,11 @@
 <h1 class="text-center text-top">Post Something</h1>
 
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="/add" method="post">
    <div class="form-group">
     <label for="inputUser3" class="col-sm-4 control-label">Title</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" placeholder="Title">
+      <input type="text" name="title" class="form-control" placeholder="Title">
     </div>
   </div>
 
@@ -55,7 +64,7 @@
   <label class= "col-sm-4 control-label" for="comment">Comment:</label>
 
   <div class="col-sm-4">
-  <textarea class="form-control" rows="8" id="comment"></textarea>
+  <textarea class="form-control" name="content" rows="8" id="comment"></textarea>
   </div>
 </div>
   <div class="form-group">
