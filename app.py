@@ -2,7 +2,7 @@
 A simple page blog
 """
 import os
-import ipdb
+
 from flask import Flask, render_template, redirect, url_for, flash, \
     request, session
 from datetime import date
