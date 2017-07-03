@@ -1,9 +1,13 @@
-# imports
+"""
+A simple page blog
+"""
 import ipdb
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, \
+    request, session
 from datetime import date
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import desc
 from flask_migrate import Migrate, MigrateCommand
 
 
@@ -63,26 +67,31 @@ class Post(db.Model):
 @app.route('/')
 @app.route('/index')
 def index():
-    post = db.Post.query.all()
+    post = Post.query.order_by(desc(Post.date_pub))
     return render_template('index.html', post=post)
 
 
-@app.route('/add', methods=['POST', 'GET'])
+@app.route('/add', methods=['POST'])
 def add():
     error = None
     if request.method == 'POST':
-        post = Post(request.form['title'], request.form['content'])
-        db.session.add(post)
-        db.session.commit()
-        flash('New entry was successfully posted')
-        return redirect(url_for('index'))
-    return render_template('index.html')
+        title = request.form['title']
+        content = request.form['content']
+        if title == '' or content == '':
+            error = 'Both field are required!'
+        else:
+            post = Post(title, content)
+            db.session.add(post)
+            db.session.commit()
+            flash('New entry was successfully posted')
+            return redirect(url_for('index'))
+    return render_template('index.html', error=error)
 
-
+'''
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
-
+'''
 
 @app.route('/about')
 def about():
@@ -91,18 +100,57 @@ def about():
 
 @app.route('/contact')
 def contact():
+    """
+
+    """
     return render_template('contact.html')
 
 
-@app.route('/login')
-def login():
-   """ ```
+@app.route('/signup', methods=['POST', 'GET'])
+def signup():
     error = None
     if request.method == 'POST':
-        if request.form['']
+        user = request.form['user']
+        email = request.form['email']
+        password = request.form['password']
+        repeat_password = request.form['repeat-password']
+        if user == '' or email == '' or password != repeat_password:
+            error = 'You need fill both fields'
+        else:
+            login = User(user, email, password)
+            db.session.add(login)
+            db.session.commit()
+            flash('Login was create with sucessufully.')
+            return redirect(url_for('index'))
+    return render_template('signup.html', error=error)
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        pass
     return render_template('login.html')
 
-"""
+
+
+@app.route('/logout/')
+def logout():
+    session.pop('logged_in', None)
+    flash('Goodbye!')
+    return redirect(url_for('index'))
+
+@app.route('/update/<int:id>/')
+def update_entry(id):
+    pass
+@app.route('/delete/<int:id>/')
+def delete_entry(id):
+    new_id = id
+    db.session.query(Post).filter_by(id=new_id).delete()
+    db.session.commit()
+    flash('The post was delete.')
+    return redirect(url_for('index'))
+
+
 
 if __name__ == '__main__':
     manager.run()
