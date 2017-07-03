@@ -114,7 +114,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         repeat_password = request.form['repeat-password']
-        if user is Not None or email is Not None or password != repeat_password:
+        if user is not None or email is not None or password != repeat_password:
             error = 'You need fill both fields'
         else:
             login = User(user, email, password)
@@ -128,10 +128,10 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = User.query.filter_by(email=request.form['email']).first()
-        if email is not None and User.password == request.form['password']:
+        user = User.query.filter_by(email=request.form['email']).first()
+        if user is not None and user.password == request.form['password']:
             session['logged_in'] = True
-            flash('Welcome!')
+            flash('Welcome, {}'.format(user.username))
             return redirect(url_for('index'))
         else:
             error = "Invalid email or password"
