@@ -106,7 +106,7 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/signup', methods=['POST', 'GET'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     error = None
     if request.method == 'POST':
@@ -114,7 +114,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         repeat_password = request.form['repeat-password']
-        if user == '' or email == '' or password != repeat_password:
+        if user is Not None or email is Not None or password != repeat_password:
             error = 'You need fill both fields'
         else:
             login = User(user, email, password)
@@ -125,11 +125,19 @@ def signup():
     return render_template('signup.html', error=error)
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        pass
-    return render_template('login.html')
+        email = User.query.filter_by(email=request.form['email']).first()
+        if email is not None and User.password == request.form['password']:
+            session['logged_in'] = True
+            flash('Welcome!')
+            return redirect(url_for('index'))
+        else:
+            error = "Invalid email or password"
+    else:
+        error = "Both fields are requred"
+    return render_template('login.html', error=error)
 
 
 
