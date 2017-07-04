@@ -1,3 +1,1 @@
-web: gunicorn gettingstarted.wsgi --log-file -
-
-web: python app.py runserver --host 0.0.0.0 
+web: python app.py runserver -h 0.0.0.0 -p 5000
