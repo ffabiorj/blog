@@ -1,10 +1,15 @@
-"""
-A simple page blog
-"""
+
+#app.py
+
 import os
 
-from flask import Flask, render_template, redirect, url_for, flash, \
-    request, session
+from flask import Flask
+from flask import render_template
+from flask import redirect
+from flask import url_for
+from flask import flash
+from flask import request
+from flask import session
 from datetime import date
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
@@ -88,11 +93,6 @@ def add():
             return redirect(url_for('index'))
     return render_template('index.html', error=error)
 
-'''
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
-'''
 
 @app.route('/about')
 def about():
@@ -144,13 +144,32 @@ def login():
 
 @app.route('/logout/')
 def logout():
+    """
+    A function to do logout.
+
+    """
     session.pop('logged_in', None)
     flash('Goodbye!')
     return redirect(url_for('index'))
 
-@app.route('/update/<int:id>/')
+
+@app.route('/update/<int:id>/', methods=['GET', 'POST'])
 def update_entry(id):
-    pass
+    """
+    A fuction do an update in form.
+
+    """
+    post = Post.query.filter_by(id = id).first()
+    if request.method == 'POST':
+        post.title = request.form['title']
+        post.content = request.form['content']
+        db.session.commit()
+        flash('Update was made with successufully')
+        return redirect(url_for('index'))
+    form = (Post(post.title, post.content))
+    return render_template('edit.html', form=form)
+
+
 @app.route('/delete/<int:id>/')
 def delete_entry(id):
     new_id = id
