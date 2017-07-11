@@ -11,7 +11,7 @@
    <div class="form-group">
     <label for="inputUser3" class="col-sm-4 control-label">Title</label>
     <div class="col-sm-4">
-      <input type="text" name="title" class="form-control" placeholder="Title">
+      <input type="text" name="title" class="form-control" placeholder="Title" value="{{ form.title }}">
     </div>
   </div>
 
@@ -19,11 +19,12 @@
   <label class= "col-sm-4 control-label" for="comment">Comment:</label>
 
   <div class="col-sm-4">
-  <textarea class="form-control" name="content" rows="8" id="comment" placeholder="Say something"></textarea>
+  <textarea class="form-control" name="content" rows="8" id="comment" placeholder="Say something" value="{{ form.content }}"></textarea>
   </div>
 </div>
   <div class="form-group">
     <div class="text-center">
+      <a href="{{ url_for('index') }}"><button type="button" class="btn btn-primary button">Back</button></a>
       <button type="submit" class="btn btn-primary button">Update</button>
     </div>
   </div>

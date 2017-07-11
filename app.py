@@ -128,16 +128,17 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
         user = User.query.filter_by(email=request.form['email']).first()
         if user is not None and user.password == request.form['password']:
             session['logged_in'] = True
-            flash('Welcome, {}'.format(user.username))
+            flash('Welcome,')
             return redirect(url_for('index'))
         else:
             error = "Invalid email or password"
     else:
-        error = "Both fields are requred"
+        error = "Both fields are required"
     return render_template('login.html', error=error)
 
 
@@ -146,7 +147,6 @@ def login():
 def logout():
     """
     A function to do logout.
-
     """
     session.pop('logged_in', None)
     flash('Goodbye!')
@@ -157,7 +157,6 @@ def logout():
 def update_entry(id):
     """
     A fuction do an update in form.
-
     """
     post = Post.query.filter_by(id = id).first()
     if request.method == 'POST':
