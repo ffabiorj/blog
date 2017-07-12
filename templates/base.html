@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <title>Blog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href=" {{ url_for('static', filename='fonts') }}">
   <link rel="stylesheet" href=" {{ url_for('static', filename='css/style.css') }}">
-  </head>
-  <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ url_for('index')}}">Blog</a>
-                </div>
-                <div>
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ url_for('index') }}">Home</a></li>
-                        <li><a href="{{ url_for('about') }}">About</a></li>
-                        <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    </ul>
-                 </div>
-                 <ul class="nav navbar-nav navbar-right">
-                   {% if session.logged_in %}
-                   
-                   <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out">Log out</span></a></li>
-                   {% else %}
-                   <li><a href="{{ url_for('signup') }}"><span class="glyphicon glyphicon-user">SignUp</span></a></li>
-                   <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in">Login</span></a></li>
-                   {% endif %}
-                 </ul>
-            </div>
-        </div>
-</div>
+</head>
 
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-          {% for message in messages %}
-        <li><div class="alert alert-success alert1" role="alert">{{ message }}</div></li>
-        {% endfor %}
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('index')}}">Blog</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
         </ul>
-        {% endif%}
-        {% endwith %}
-        {% block content %}
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        {% if session.logged_in %}
 
-        {% endblock %}
-         </div>
+        <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out">Log out</span></a></li>
+        {% else %}
+        <li><a href="{{ url_for('signup') }}"><span class="glyphicon glyphicon-user">SignUp</span></a></li>
+        <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in">Login</span></a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  </div>
 
-         <footer class="footer">
-           <div class="fot">
-           <span>Created and Developed by Fabio Oliveira</span>
-           </div>
-         </footer>
+  <div class="container">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }} "></script>
-  </body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>
+        <div class="alert alert-success alert1" role="alert">{{ message }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif%} {% endwith %} {% block content %} {% endblock %}
+  </div>
+
+  <footer class="footer">
+    <div class="fot">
+      <span>Created and Developed by Fabio Oliveira</span>
+    </div>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }} "></script>
+</body>
+
 </html>

@@ -1,5 +1,5 @@
 
-#app.py
+# app.py
 
 import os
 
@@ -136,11 +136,9 @@ def login():
             flash('Welcome,')
             return redirect(url_for('index'))
         else:
-            error = "Invalid email or password"
-    else:
-        error = "Both fields are required"
+            flash("Invalid email or password")
+            return redirect(url_for('login'))
     return render_template('login.html', error=error)
-
 
 
 @app.route('/logout/')
@@ -156,17 +154,16 @@ def logout():
 @app.route('/update/<int:id>/', methods=['GET', 'POST'])
 def update_entry(id):
     """
-    A fuction do an update in form.
+    A fuction do an update in a form.
     """
-    post = Post.query.filter_by(id = id).first()
+    post = Post.query.filter_by(id=id).first()
     if request.method == 'POST':
         post.title = request.form['title']
         post.content = request.form['content']
         db.session.commit()
         flash('Update was made with successufully')
         return redirect(url_for('index'))
-    form = (Post(post.title, post.content))
-    return render_template('edit.html', form=form)
+    return render_template('edit.html', post=post)
 
 
 @app.route('/delete/<int:id>/')
@@ -176,7 +173,6 @@ def delete_entry(id):
     db.session.commit()
     flash('The post was delete.')
     return redirect(url_for('index'))
-
 
 
 if __name__ == '__main__':

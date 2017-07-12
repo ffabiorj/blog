@@ -1,14 +1,14 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
+{% block content %} 
 
-{% block content %}
 {% if error %}
 <p class="error">{{ error }}</p>
 {% endif %}
-   <h1 class="text-center top">Login</h1>
+<h1 class="text-center top">Login</h1>
 
 
-    <form class="form-horizontal" action="{{ url_for('login')}}" method="POST">
+<form class="form-horizontal" action="{{ url_for('login')}}" method="POST">
 
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
@@ -19,7 +19,7 @@
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
     <div class="col-sm-4">
-      <input type="password" name="password" class="form-control"  placeholder="Password">
+      <input type="password" name="password" class="form-control" placeholder="Password">
     </div>
   </div>
 

@@ -1,76 +1,74 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block content %}
 
 <div class="blog-header">
   <h1 class="blog-title">The Blog</h1>
-    <p class="lead blog-description">
-      The official exemplo about of blog
-    </p>
+  <p class="lead blog-description">
+    The official exemplo about of blog
+  </p>
   </h1>
 </div>
 <div class="row">
-<div class="col-sm-8 blog-man">
-<div class="blog-post"></div>
-{% for post in post %}
-<h2 class="blog-post-title">{{ post.title }}</h2>
-<p class="blog-date">
-  {{ post.date_pub }}
-</p>
+  <div class="col-sm-8 blog-man">
+    <div class="blog-post"></div>
+    {% for post in post %}
+    <h2 class="blog-post-title">{{ post.title }}</h2>
+    <p class="blog-date">
+      {{ post.date_pub }}
+    </p>
 
-<p>{{ post.content }}</p>
-{% if session.logged_in %}
-<a href="{{ url_for('update_entry', id = post.id) }}"><button type="button" class="btn btn-primary">Update</button></a>
-<a href="{{ url_for('delete_entry', id = post.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+    <p>{{ post.content }}</p>
+    {% if session.logged_in %}
+    <a href="{{ url_for('update_entry', id = post.id) }}"><button type="button" class="btn btn-primary">Update</button></a>
+    <a href="{{ url_for('delete_entry', id = post.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>    {% endif %}
+    <hr> {% endfor %}
+
+  </div>
+  <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+    <div class="sidebar-module">
+      <h4>Archives</h4>
+      <ol class="list-unstyled">
+        <li>
+          <a href="#">teste1teste1teste1</a>
+          <a href="#">teste1teste1teste1</a>
+          <a href="#">teste1teste1teste1</a>
+          <a href="#">teste1teste1teste1</a>
+          <a href="#">teste1teste1teste1</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+{% if error %}
+<p style="text-align:center;">{{ error }}</p>
+
 {% endif %}
-<hr>
-{% endfor %}
-
-</div>
-<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-  <div class="sidebar-module">
-    <h4>Archives</h4>
-    <ol class="list-unstyled">
-      <li>
-        <a href="#">teste1teste1teste1</a>
-        <a href="#">teste1teste1teste1</a>
-        <a href="#">teste1teste1teste1</a>
-        <a href="#">teste1teste1teste1</a>
-        <a href="#">teste1teste1teste1</a>
-      </li>
-    </ol>
-  </div>
-</div>
-</div>
-  {% if error %}
-    <p style="text-align:center;">{{ error }}</p>
-
-  {% endif %}
 <div class="form">
-<h1 class="text-center text-top">Post Something</h1>
+  <h1 class="text-center text-top">Post Something</h1>
 
 
-    <form class="form-horizontal" action="/add" method="post">
-   <div class="form-group">
-    <label for="inputUser3" class="col-sm-4 control-label">Title</label>
-    <div class="col-sm-4">
-      <input type="text" name="title" class="form-control" placeholder="Title">
+  <form class="form-horizontal" action="/add" method="post">
+    <div class="form-group">
+      <label for="inputUser3" class="col-sm-4 control-label">Title</label>
+      <div class="col-sm-4">
+        <input type="text" name="title" class="form-control" placeholder="Title">
+      </div>
     </div>
-  </div>
 
-   <div class="form-group">
-  <label class= "col-sm-4 control-label" for="comment">Comment:</label>
+    <div class="form-group">
+      <label class="col-sm-4 control-label" for="comment">Comment:</label>
 
-  <div class="col-sm-4">
-  <textarea class="form-control" name="content" rows="8" id="comment" placeholder="Say something"></textarea>
-  </div>
-</div>
-  <div class="form-group">
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary button">Send</button>
+      <div class="col-sm-4">
+        <textarea class="form-control" name="content" rows="8" id="comment" placeholder="Say something"></textarea>
+      </div>
     </div>
-  </div>
-</form>
+    <div class="form-group">
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary button">Send</button>
+      </div>
+    </div>
+  </form>
 </div>
 
 
