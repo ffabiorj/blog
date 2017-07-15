@@ -128,6 +128,7 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """A function to do a login"""
     error = None
     if request.method == 'POST':
         user = User.query.filter_by(email=request.form['email']).first()
@@ -143,19 +144,15 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    """
-    A function to do logout.
-    """
+    """A function to do logout."""
     session.pop('logged_in', None)
     flash('Goodbye!')
     return redirect(url_for('index'))
 
 
 @app.route('/update/<int:id>/', methods=['GET', 'POST'])
-def update_entry(id):
-    """
-    A fuction do an update in a form.
-    """
+def update(id):
+    """ A fuction do an update in a post."""
     post = Post.query.filter_by(id=id).first()
     if request.method == 'POST':
         post.title = request.form['title']
@@ -167,9 +164,9 @@ def update_entry(id):
 
 
 @app.route('/delete/<int:id>/')
-def delete_entry(id):
-    new_id = id
-    db.session.query(Post).filter_by(id=new_id).delete()
+def delete(id):
+    """A fuction that delete an post"""
+    db.session.query(Post).filter_by(id=id).delete()
     db.session.commit()
     flash('The post was delete.')
     return redirect(url_for('index'))

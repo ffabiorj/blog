@@ -20,8 +20,8 @@
 
     <p>{{ post.content }}</p>
     {% if session.logged_in %}
-    <a href="{{ url_for('update_entry', id = post.id) }}"><button type="button" class="btn btn-primary">Update</button></a>
-    <a href="{{ url_for('delete_entry', id = post.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>    {% endif %}
+    <a href="{{ url_for('update', id = post.id) }}"><button type="button" class="btn btn-primary">Update</button></a>
+    <a href="{{ url_for('delete', id = post.id) }}"><button type="button" class="btn btn-danger">Delete</button></a>    {% endif %}
     <hr> {% endfor %}
 
   </div>
